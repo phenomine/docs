@@ -1,0 +1,25 @@
+# Installation
+ 
+Before creating your first Phenomine project, you should ensure that your local machine
+has PHP and Composer installed. After you have installed PHP and Composer, you may create a new Phenomine project via the Composer create-project command:
+
+```sh copy
+composer create-project phenomine/phenomine project-name
+```
+
+After the project has been created, start Phenomine's local development server using the Phenomine's CLI `serve` command:
+
+```sh copy
+cd project-name
+php phenomine serve
+```
+
+Once you have started the Phenomine development server, your application will be accessible in your web browser at `http://localhost:8000`. Of course, you are free to configure the serve command with a different port number if desired.
+
+If you want to use different port to run your application, you can use the `--port` option:
+
+```sh copy
+php phenomine serve --port=80 --host=0.0.0.0
+```
+
+That's it! Now go build something cool.

@@ -1,0 +1,15 @@
+{
+  "index": "Introduction",
+  "installation": "Installation",
+  "advanced": "Advanced (A Folder)",
+  "about": {
+    "title": "About",
+    "type": "page"
+  },
+  "contact": {
+    "title": "Donate ↗",
+    "type": "page",
+    "href": "https://github.com/phenomine",
+    "newWindow": true
+  }
+}
