@@ -5,7 +5,6 @@ import lightLogotype from "./public/images/logos/lightLogotype.png";
 import darkLogotype from "./public/images/logos/darkLogotype.png";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { VersionSelector } from "./components/version-selector";
 
 const useDark = () => {
   const { resolvedTheme } = useTheme();
