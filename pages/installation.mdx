@@ -1,11 +1,29 @@
+import { Steps } from 'nextra/components'
+
 # Installation
- 
+
+Welcome to the Phenomine framework! If you're reading this, it probably means you're looking for a quick way to install Phenomine. If you haven't already, make sure to check out the official [Phenomine documentation](https://phenomine.spentura.com) for an introduction to the framework.
+
+## System Requirements
+The Phenomine framework has a few system requirements. Make sure that your local machine meets the following requirements:
+
+- PHP ^8.0
+- Composer ^2.0
+
+That's all! You ready to install Phenomine.
+
+## Installing Phenomine
+
+### Install via Composer
+
 Before creating your first Phenomine project, you should ensure that your local machine
 has PHP and Composer installed. After you have installed PHP and Composer, you may create a new Phenomine project via the Composer create-project command:
 
 ```sh copy
 composer create-project phenomine/phenomine project-name
 ```
+
+### Start the development server
 
 After the project has been created, start Phenomine's local development server using the Phenomine's CLI `serve` command:
 
@@ -16,6 +34,7 @@ php phenomine serve
 
 Once you have started the Phenomine development server, your application will be accessible in your web browser at `http://localhost:8000`. Of course, you are free to configure the serve command with a different port number if desired.
 
+### Start the development server with custom port
 If you want to use different port to run your application, you can use the `--port` option:
 
 ```sh copy

@@ -1,7 +1,11 @@
 {
+  "get_started": {
+    "type": "separator",
+    "title": "Getting Started"
+  },
   "index": "Introduction",
   "installation": "Installation",
-  "advanced": "Advanced (A Folder)",
+  "the-basic": "The Basics",
   "about": {
     "title": "About",
     "type": "page"
