@@ -73,8 +73,6 @@ Route::get('/user', 'App\Controllers\UserController@index');
 ```
 
 
-
-
 ## The Route List Command
 You may use the `route:list` command to view a list of all registered routes for your application. 
 
@@ -83,6 +81,17 @@ php phenomine route:list
 ```
 
 This may be useful when debugging or generating URLs to named routes.
+
+You can use `-f` option to show full route file origin path on list.
+
+```bash
+php phenomine route:list -f
+```
+You can also filter the routes by HTTP method with `--method` option. For example:
+```bash
+php phenomine route:list --method=GET -f
+```
+
 
 ## Route Parameters
 
