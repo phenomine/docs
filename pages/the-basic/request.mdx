@@ -1,0 +1,64 @@
+import { Callout } from 'nextra/components'
+
+# Request
+
+Phenomine `Request` class provides an object-oriented way to interact with the current HTTP request being handled by your application as well as retrieve the input that were submitted with the request.
+
+
+## Interacting With The Request
+### Accessing The Request
+To obtain an instance of the current HTTP request, you may use `request()` helper on your route closure or controller method.
+
+```php showLineNumbers copy
+<?php
+
+namespace App\Controllers;
+
+class ProductController {
+
+    public function store() {
+        $sku = request('sku');
+        $name = request('name');
+        $price = request('price');
+
+        // insert data
+        db()->insert("INSERT INTO products (sku, name, price) VALUES (:sku, :name, :price)", [
+            'sku' => $sku,
+            'name' => $name,
+            'price' => $price
+        ]);
+
+        return redirect(route('products'));
+    }
+```
+
+### Accessing Route Parameters
+If your controller method is also expecting input from a route parameter, simply use `request()->param()` method. For example, if your route is defined like so:
+
+```php showLineNumbers filename="routes/web.php" {4} copy
+use Phenomine\Support\Route;
+use App\Controllers\UserController;
+
+Route::post('/user/{id}', [UserController::class, 'update']);
+```
+
+You may access your `id` route parameter by calling `request->param()` method as follows:
+
+```php showLineNumbers copy
+<?php
+
+namespace App\Controllers;
+
+class UserController {
+
+    public function update() {
+        $name = request('name');
+
+        db()->update("UPDATE users SET name = :name WHERE id = :id", [
+            'id' => request()->param('id'),
+            'name' => 'Fahli Saputra',
+        ]);
+
+        return redirect(route('users'));
+    }
+```

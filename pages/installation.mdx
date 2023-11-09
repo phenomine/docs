@@ -26,22 +26,27 @@ composer create-project phenomine/phenomine project-name --stability dev
 Make sure to replace `project-name` with the name of the directory in which you want to install the project.
 Please use stability flag `--stability dev` to install the latest development version of Phenomine.
 
-### Start the development server
+### Run the development server
 
-After the project has been created, start Phenomine's local development server using the Phenomine's CLI `serve` command:
+After the project has been created, run Phenomine's local development server using the Phenomine's CLI `run` command:
 
 ```sh copy
 cd project-name
-php phenomine serve
+php phenomine run
 ```
 
-Once you have started the Phenomine development server, your application will be accessible in your web browser at `http://localhost:8000`. Of course, you are free to configure the serve command with a different port number if desired.
+Once you have started the Phenomine development server, your application will be accessible in your web browser at `http://localhost:8000`. Of course, you are free to configure the `run` command with a different port number if desired.
 
-### Start the development server with custom port
+### Run the development server with custom port or host
 If you want to use different port to run your application, you can use the `--port` option:
 
 ```sh copy
-php phenomine serve --port=80 --host=0.0.0.0
+php phenomine run --port=80
+```
+
+Or, if you wish to make your local application accessible to the local network, you may use the `--host` option:
+```sh copy
+php phenomine run --port=80 --host=0.0.0.0
 ```
 
 That's it! Now go build something cool.

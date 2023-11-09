@@ -122,6 +122,22 @@ Route::get('/user/{name?}', function (?string $name = null) {
 
 Now, if you browse to `/user` the response will be `null`. If you browse to `/user/John` the response will be `John`.
 
+### Fetch Parameters on Controller
+On the controller, you can retrieve the route parameters either through variables on the controller or by using the `request` helper. For example:
+
+```php showLineNumbers copy
+public function index(?string $name = null, ?string $age = null) {
+    // Directly by variables
+    echo $name;
+
+    // Get all params in route
+    request()->params();
+
+    // Get route param by name
+    request()->params('name');
+}
+```
+
 ## Named Routes
 
 Named routes allow the convenient generation of URLs or redirects for specific routes. You may specify a name for a route by chaining the `name` method onto the route definition:

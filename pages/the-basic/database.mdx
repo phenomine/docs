@@ -1,0 +1,68 @@
+import { Callout } from 'nextra/components'
+
+# Database
+
+Phenomine DB helper provides a convenient way to running database queries. It can be used to perform most database operations in your application. For the present time, Phenomine is only capable of supporting SQL databases including MySQL, MariaDB, PostgreSQL, and other similar options.
+
+The Phenomine DB helper uses PDO parameter binding to protect your application against SQL injection attacks.
+
+## Database Configuration
+Before you perform a query to the database, you must first set up the database. Phenomine provides a simpler way to configure your database. To configure the database, go to the config/database.php file and set the database connection credentials.
+
+```php showLineNumbers filename="config/database.php" copy
+return [
+    'host' => 'localhost',
+    'port' => '3306',
+    'database' => '',
+    'username' => '',
+    'password' => ''
+];
+```
+
+## Running Database Queries
+### Retrieving All Rows From A Table
+To fetch an entire row from the database, simply use the `fetchAll` method.
+
+```php showLineNumbers copy
+db()->fetchAll("SELECT * FROM products");
+```
+
+### Retrieving A Single Row From A Table
+If you just need to retrieve a single row from a database table, you may use the `fetch` method.
+
+```php showLineNumbers copy
+db()->fetch("SELECT * FROM products WHERE sku = :sku", [
+    'sku' => $sku
+]);
+```
+
+### Inserting Row To A Table
+To insert row, you may use the `insert` method.
+
+```php showLineNumbers copy
+db()->insert("INSERT INTO products (sku, name, price) VALUES (:sku, :name, :price)", [
+    'sku' => $sku,
+    'name' => 'Product 1',
+    'price' => 1000
+]);
+```
+
+### Updating Data
+To update data, you may use the `update` method.
+
+```php showLineNumbers copy
+db()->update("UPDATE products SET name = :name, price = :price WHERE sku = :sku", [
+    'sku' => $sku,
+    'name' => 'Product 1',
+    'price' => 1000
+]);
+```
+
+### Deleting Data
+To delete data, you may use the `delete` method.
+
+```php showLineNumbers copy
+db()->delete("DELETE FROM products WHERE sku = :sku", [
+    'sku' => $sku
+]);
+```
