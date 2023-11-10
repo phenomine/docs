@@ -10,13 +10,24 @@ The Phenomine DB helper uses PDO parameter binding to protect your application a
 Before you perform a query to the database, you must first set up the database. Phenomine provides a simpler way to configure your database. To configure the database, go to the config/database.php file and set the database connection credentials.
 
 ```php showLineNumbers filename="config/database.php" copy
+<?php
+
 return [
+    'driver' => 'mysql',
     'host' => 'localhost',
     'port' => '3306',
     'database' => '',
-    'username' => '',
-    'password' => ''
+    'username' => 'root',
+    'password' => '',
+    'socket' => '',
+    'options' => [
+        'charset' => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'table_prefix' => '',
+    ],
+    'migration_table' => 'db_migrations'
 ];
+
 ```
 
 ## Running Database Queries
@@ -24,23 +35,20 @@ return [
 To fetch an entire row from the database, simply use the `fetchAll` method.
 
 ```php showLineNumbers copy
-db()->fetchAll("SELECT * FROM products");
+db()->select('products', '*')
 ```
 
-### Retrieving A Single Row From A Table
-If you just need to retrieve a single row from a database table, you may use the `fetch` method.
+Or, if you need to specify what columns to retrieve, simply pass array to select method.
 
 ```php showLineNumbers copy
-db()->fetch("SELECT * FROM products WHERE sku = :sku", [
-    'sku' => $sku
-]);
+db()->select('products', ['sku', 'name', 'price'])
 ```
 
 ### Inserting Row To A Table
 To insert row, you may use the `insert` method.
 
 ```php showLineNumbers copy
-db()->insert("INSERT INTO products (sku, name, price) VALUES (:sku, :name, :price)", [
+db()->insert("products", [
     'sku' => $sku,
     'name' => 'Product 1',
     'price' => 1000
@@ -51,10 +59,10 @@ db()->insert("INSERT INTO products (sku, name, price) VALUES (:sku, :name, :pric
 To update data, you may use the `update` method.
 
 ```php showLineNumbers copy
-db()->update("UPDATE products SET name = :name, price = :price WHERE sku = :sku", [
-    'sku' => $sku,
-    'name' => 'Product 1',
-    'price' => 1000
+db()->update("products", [
+    'price' => 2000
+],[
+    'sku' => $sku
 ]);
 ```
 
@@ -62,7 +70,7 @@ db()->update("UPDATE products SET name = :name, price = :price WHERE sku = :sku"
 To delete data, you may use the `delete` method.
 
 ```php showLineNumbers copy
-db()->delete("DELETE FROM products WHERE sku = :sku", [
+db()->delete("products", [
     'sku' => $sku
 ]);
 ```

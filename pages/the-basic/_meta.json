@@ -1,4 +1,7 @@
 {
     "routing": "Routing",
-    "views": "Views"
+    "views": "Views",
+    "controllers": "Controllers",
+    "request": "Request",
+    "database": "Database"
 }
