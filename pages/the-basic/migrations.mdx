@@ -1,0 +1,114 @@
+import { Callout } from 'nextra/components'
+
+# Database Migrations
+
+Migrations are like version control for your database, allowing your team to define and share the application's database schema definition. If you have ever had to tell a teammate to manually add a column to their local database schema after pulling in your changes from source control, you've faced the problem that database migrations solve.
+
+## Generating Migration
+You may use the `make:migration` command to generate a database migration. The new migration will be placed in your `db/migrations` directory. Each migration filename contains a timestamp that allows Phenomine to determine the order of the migrations:
+
+```sh copy
+php phenomine make:migration users
+```
+
+Running `make:migration` command with table name argument.
+
+## Migration Structure
+A migration class contains two methods: up and down. The up method is used to add new columns to your database, while the down method should reverse the operations performed by the up method.
+
+```php copy
+<?php
+
+use Phenomine\Support\Database\Migration;
+
+class migration_20231110113113_users extends Migration {
+    protected $table = 'users';
+
+    public function up() {
+         $this->id();
+         $this->string('name');
+         $this->string('email')->unique();
+    }
+
+    public function down() {
+        $this->dropTableIfExists();
+    }
+}
+
+```
+You must specify the table name on the migration file.
+
+## Running Migrations
+To run all of your outstanding migrations, execute the migrate command:
+
+```sh copy
+php phenomine migrate
+```
+
+## Rolling Back Migrations
+To roll back the latest migration operation, you may use the rollback command. This command rolls back the last "batch" of migrations, which may include multiple migration files:
+
+```sh copy
+php phenomine migrate:rollback
+```
+
+
+## Columns
+### Creating Columns
+To create a new column, you may define in `up()` method. For the example.
+
+```php copy
+public function up() {
+     $this->id();
+     $this->string('name');
+     $this->string('email')->unique();
+}
+```
+### Available Column Types
+The table builder blueprint offers a variety of methods that correspond to the different types of columns you can add to your database tables. Each of the available methods are listed below:
+
+```php copy
+public function up() {
+     $this->id();
+     $this->string('name');
+     $this->integer('age');
+     $this->boolean('active');
+     $this->date('birthdate');
+     $this->datetime('registered_at');
+     $this->time('active_hour');
+     $this->timestamp('updated_at');
+     $this->decimal('point', [10,2])
+     $this->float('float_type');
+     $this->double('value', [8,2]);
+     $this->bigint('number');
+     $this->text('address');
+}
+```
+
+You can specify the length of column with passing length parameter to migration.
+
+### Column Modifiers
+In addition to the column types listed above, there are several column "modifiers" you may use when adding a column to a database table. For example, to make the column "nullable", you may use the nullable method:
+
+Modifier  |  Description
+--------  |  -----------
+`->autoIncrement()`  |  Set INTEGER columns as auto-incrementing.
+`->comment('my comment')`  |  Add a comment to a column (MySQL/PostgreSQL).
+`->default($value)`  |  Specify a "default" value for the column.
+`->nullable($value = true)`  |  Allow NULL values to be inserted into the column.
+`->unsigned()`  |  Set INTEGER columns as UNSIGNED (MySQL).
+`->primaryKey()` | Set column as PRIMARY KEY
+`->unique()` | Set column must UNIQUE
+
+## Drop Table
+To drop an existing table, you may use the `dropIfExists` method on `down()`:
+
+```php copy
+
+public function down() {
+    $this->dropTableIfExists();
+}
+
+
+```
+Phenomine automatically dropping table that defined on migration when rollback function called.

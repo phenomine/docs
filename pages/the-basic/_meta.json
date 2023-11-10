@@ -3,5 +3,6 @@
     "views": "Views",
     "controllers": "Controllers",
     "request": "Request",
-    "database": "Database"
+    "database": "Database",
+    "migrations": "Database Migrations"
 }

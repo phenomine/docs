@@ -32,7 +32,7 @@ return [
 
 ## Running Database Queries
 ### Retrieving All Rows From A Table
-To fetch an entire row from the database, simply use the `fetchAll` method.
+To fetch an entire row from the database, simply use the `select()` method with argument `*`.
 
 ```php showLineNumbers copy
 db()->select('products', '*')
