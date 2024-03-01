@@ -1,0 +1,43 @@
+import { Steps } from 'nextra/components'
+
+# Upgrade Guide
+
+## Upgrading to 2.x from 1.x
+You can migrate the Phenomine 1.x to 2.x easily by following this guide.
+
+## High Impact Changes
+
+### Updating Dependencies
+- Phenomine now requires PHP 8.0 or greater.
+- Composer 2.x is required
+
+You should update the following dependencies in your application's composer.json file:
+- `phenomine/framework` to `^2.0.1`
+
+Finally, examine any other third-party packages consumed by your application and verify you are using the proper version for Phenomine 2.x support.
+
+### Create .env File 
+Phenomine 2.x is totally require .env file to run properly. You need to create `.env` file inside your project root directory.
+
+```env
+APP_NAME="The Phenomine Framework"
+APP_ENV=local #production, local
+
+DB_DRIVER=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=phenomine
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### UUID Helper
+You may change `uuidv4()` function in your application to `uuid()` if you use this helper.
+
+## Low Impact Changes
+
+### Seeder Directory
+You may create the seeder directory inside `db/seeders`.
+
+### Model Directory 
+You may create the model directory inside `app/Models`.

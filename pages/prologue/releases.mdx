@@ -1,0 +1,82 @@
+import { Steps } from 'nextra/components'
+
+# Release Notes
+
+## Versioning Scheme
+Phenomine follow Semantic Versioning. Minor and patch releases should never contain breaking changes.
+
+When referencing the Phenomine framework or its components from your application or package, you should always use a version constraint such as ^2.0, since major releases of Phenomine do include breaking changes. However, we strive to always ensure you may update to a new major release in one day or less.
+
+## Phenomine 2
+Phenomine 2 continues the improvements made in Phenomine 1.x by introducing the support for simple object-relational mapping (ORM) as well as all stub files used to generate models throughout the framework. In addition to support the ORM, we also added database seeders support with developer-friendly to intreact with console using `db:seed` command. We also simplify some naming function in core framework.
+
+
+### PHP 8.0
+Phenomine 2.x requires a minimum PHP version of 8.0.
+
+### .env File
+Phenomine uses `.env` files to store configurations for your applications. In starter project, we include the `.env.example` file that can you rename to use in your application.
+
+```env
+APP_NAME="The Phenomine Framework"
+APP_ENV=local #production, local
+
+DB_DRIVER=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=phenomine
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+### Exception Handler
+We also introducing new exception handler with custom user-friendly UI to show error stack trace. Developer can disable this error message by changing environment to `production`.
+
+### Model 
+We added support for the Model class which can help you to access the database more easily out-of-the-box. To ensure model can work properly, you need to use plural table name on database. For example table name `users` the model name `User`. Phenomine will automatically determine this naming convention.
+If you dont follow this naming rule, you can also override the table name setting by changing `protected $table = 'name';` attribute to the model.
+
+To create new model, you can use:
+```sh
+php phenomine make:model User
+```
+
+or if you want to create a new model with migration in one command, you can use `--m` option. For example:
+```sh
+php phenomine make:model User --m
+```
+
+This command, will create a model and migration file.
+
+### Database Seeders
+We added support for the database seeder class which can help you to seed the database more easily out-of-the-box. 
+
+To create new seeder, you can use:
+```sh
+php phenomine make:seeder UserSeeder
+```
+Where `UserSeeder` is your seeder name. Feel free to change this name.
+
+Inside the seeder you will see:
+```php
+<?php
+
+use App\Models\User;
+use Phenomine\Support\Seeder;
+
+class UserSeeder extends Seeder {
+
+    public function run() {
+        User::create([
+            'name' => 'Fahli Saputra',
+            'email' => 'fahli@opensource.fahli.net'
+        ]);
+    }
+
+}
+```
+
+You can create data inside `run()` function. After that, you can run seeder with:
+```sh
+php phenomine db:seed 
+```
